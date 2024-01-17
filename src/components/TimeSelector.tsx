@@ -28,7 +28,7 @@ const TimeSelector: FC<TimeSelectorProps> = ({
 }) => {
 	// generate time options from 00:00 to 23:30
 
-	if (!selected) return <p>none selected</p>
+	if (!selected) return <span>none selected</span>
 
 	// ensure this format 08:00 instead of 8:00
 	if (type === 'openTime') selected = selected.padStart(5, '0')

@@ -1,4 +1,4 @@
-import type { categories } from 'src/constants/config'
+import type { categories } from '@/constants/config'
 
 type DateTime = {
 	justDate: Date | null

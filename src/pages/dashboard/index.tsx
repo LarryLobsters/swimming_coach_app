@@ -1,17 +1,39 @@
 import Link from 'next/link'
-import type { FC } from 'react'
+import { buttonVariants } from '@/components/ui/button'
+import SidebarNav from '@/components/sidebar-nav'
 
-const dashboard: FC = () => {
-	return (
-		<div className='flex h-screen w-full items-center justify-center gap-8 font-medium'>
-			<Link className='rounded-md bg-gray-100 p-2' href='/dashboard/opening'>
-				Opening hours
-			</Link>
-			<Link className='rounded-md bg-gray-100 p-2' href='/dashboard/menu'>
-				Menu
-			</Link>
-		</div>
-	)
+interface DashboardProps {
+  children: React.ReactNode
 }
-
-export default dashboard
+export default function Dashboard({ children }: DashboardProps) {
+  return (
+    <div className='container mt-36 border'>
+      <div className='flex min-h-[calc(100vh-140px)] flex-col gap-8 py-8 md:min-h-[calc(100vh-160px)] lg:flex-row 2xl:gap-12'>
+        <aside className='lg:w-1/5'>
+          <SidebarNav />
+        </aside>
+        <div className='w-full'>{children}</div>
+        <Link
+          className={
+            buttonVariants({
+              variant: 'outline'
+            }) + 'rounded-md p-2'
+          }
+          href='/dashboard/opening'
+        >
+          Opening hours
+        </Link>
+        <Link
+          className={
+            buttonVariants({
+              variant: 'outline'
+            }) + 'rounded-md p-2'
+          }
+          href='/dashboard/menu'
+        >
+          Menu
+        </Link>
+      </div>
+    </div>
+  )
+}

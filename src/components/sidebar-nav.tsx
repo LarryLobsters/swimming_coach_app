@@ -1,0 +1,56 @@
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import Icons from '@/components/icons'
+import { Separator } from './ui/separator'
+
+const navItems = [
+  {
+    title: 'Opening Hours',
+    href: '/dashboard/opening-hours',
+    icon: Icons.apple
+  },
+  {
+    title: 'Menu',
+    href: '/dashboard/menu',
+    icon: Icons.menu
+  },
+  {
+    title: 'Billing',
+    href: '/dashboard/billing',
+    icon: Icons.billing
+  },
+  {
+    title: 'Calendar',
+    href: '/dashboard/calendar',
+    icon: Icons.settings
+  }
+]
+
+interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
+  className?: string
+}
+
+export default function SidebarNav({ className, ...props }: SidebarNavProps) {
+  const pathname = usePathname()
+  const isActive = (href: string) => pathname === href
+  return (
+    <nav className={cn('flex h-full gap-x-2 lg:flex-col lg:gap-y-1.5', className)} {...props}>
+      <Separator />
+      {navItems.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          className={cn(
+            buttonVariants({ variant: 'default' }),
+            isActive(item.href) ? 'bg-muted hover:bg-muted' : 'hover:bg-transparent hover:underline',
+            'justify-start'
+          )}
+        >
+          {<item.icon className='mr-2 h-4 w-4 ' />} {item.title}
+        </Link>
+      ))}
+    </nav>
+  )
+}
